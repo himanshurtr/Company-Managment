@@ -1,0 +1,112 @@
+
+<%= render 'search'  %>
+  <center>
+  <u><h1>Users-Profile </h1></u>
+  <table border="3px solid black">
+
+    <tr>
+      <th style="border: 2px solid black; background-color:lightgrey;"><strong>ID</strong></th>
+      <th style="border:2px solid black;background-color: lightgrey; width:90px; text-align:center;">Profile</th>
+      <th style="border: 2px solid black; background-color:lightgrey;"><strong>Username-Login</strong></th>
+      <th style="border: 2px solid black; background-color:lightgrey;"><strong>Role</strong></th>
+      <th style="border: 2px solid black; background-color:lightgrey;"><strong>Company ID</strong></th>
+      <th style="border: 2px solid black; background-color:lightgrey;" colspan="3" class="text-center"><strong>Actions</strong></th>
+    </tr>
+
+  <% if current_user.has_role? :superadmin %>
+    <% @users.each do |user| %>
+      <% if user.has_role? :superadmin %>
+        <tr>  
+          <td style="border: 2px solid black"><center><%#= user.id %></center></td>
+          <td style="border: 2px solid black"><center><%#= user.email %></center></td>
+          <td style="border: 2px solid black"><center><%#= user.roles.pluck(:name).join(" ") %></center></td>
+          <td style="border: 2px solid black"><center></center></td>
+
+          <td style="border: 2px solid black"><strong><%#= link_to "Show", super_admin_user_path(user) %></strong></td>        
+          <td style="border: 2px solid black"><strong><%#= link_to "Edit", edit_super_admin_user_path(user) %></strong> </td>
+        </tr>
+    
+      <% elsif request.path == super_admin_users_path %>
+        <% if user.company_id == @company  %>
+          <tr>       
+            <td style="border: 2px solid black"><center><%= user.id %></center></td>
+            <th style="border:2px solid black;"><center><%= image_tag user.image, style:"width:50px" if user.image.attached?%></center></th>
+            <td style="border: 2px solid black"><center><%= user.email %></center></td>
+            <td style="border: 2px solid black"><center><%= user.roles.pluck(:name).join(" ") %></center></td>
+            <td style="border: 2px solid black"><center><%= user.company_id %></center></td>
+
+            <td style="border: 2px solid black"><strong><%= link_to "Show", super_admin_user_path(user) %></strong></td>
+
+            <td style="border: 2px solid black"><strong><%= link_to "Edit", edit_super_admin_user_path(user) %></strong> </td>
+            <td style="border: 2px solid black"><br><strong><center><%= button_to "Delete",  super_admin_user_path(user), method: :delete %></center></strong><br></td>
+          </tr>
+        <%end%>
+            
+      <% elsif user.company_id == @company.id %>  
+        <tr>       
+          <td style="border: 2px solid black"><center><%= user.id %></center></td>
+          <th style="border:2px solid black;"><center><%= image_tag user.image, style:"width:50px" if user.image.attached?%></center></th>
+          <td style="border: 2px solid black"><center><%= user.email %></center></td>
+          <td style="border: 2px solid black"><center><%= user.roles.pluck(:name).join(" ") %></center></td>
+          <td style="border: 2px solid black"><center><%= user.company_id %></center></td>
+          <td style="border: 2px solid black"><strong><%= link_to "Show", super_admin_user_path(user) %></strong></td>
+          <td style="border: 2px solid black"><strong><%= link_to "Edit", edit_super_admin_user_path(user) %></strong> </td>
+          <td style="border: 2px solid black"><br><strong><center><%= button_to "Delete",  super_admin_user_path(user), method: :delete %></center></strong><br></td>
+        </tr>
+      <% end %>
+    <% end %>
+    <% end %>
+
+
+<% if current_user.has_role? :admin %>
+    <% @users.each do |user| %>
+      <% if user.company_id == @company.id %>
+        <tr>
+          <td style="border: 2px solid black"><center><%= user.id %></center></td>
+          <td style="border:2px solid black;"><center><%= image_tag user.image, style:"width:50px" if user.image.attached?%></center></td>
+          <td style="border: 2px solid black"><center><%= user.email %></center></td>
+          <td style="border: 2px solid black"><center><%= user.roles.pluck(:name).join(" ") %></center></td>
+          <td style="border: 2px solid black"><center><%= user.company_id %></center></td>
+          <td style="border: 2px solid black"><strong><%= link_to "Show", admin_company_user_path(current_user.id, @company, user.id) %></strong></td>
+          <td style="border: 2px solid black"><strong><%= link_to "Edit", edit_admin_company_user_path(current_user.id, @company, user.id) %></strong> </td>
+          <td style="border: 2px solid black"><br><strong><center><%= button_to "Delete",  admin_company_user_path(current_user, @company, user), method: :delete %></center></strong><br></td>
+        </tr>
+        <% end %>
+    <% end %>
+  <% end %>
+
+<!-- ############ Company Admin -->
+
+  <% if current_user.has_role? :company_admin %>
+    <% @users.each do |user| %>
+      <% if user.company_id == @company.id %>
+
+        <tr>
+          <td style="border: 2px solid black"><center><%= user.id %></center></td>
+          <td style="border:2px solid black;"><center><%= image_tag user.image, style:"width:50px" if user.image.attached?%></center></td>
+          <td style="border: 2px solid black"><center><%= user.email %></center></td>
+          <td style="border: 2px solid black"><center><%= user.roles.pluck(:name).join(" ") %></center></td>
+          <td style="border: 2px solid black"><center><%= user.company_id %></center></td>
+          <td style="border: 2px solid black"><strong><center><%= link_to "Show", admin_company_user_path(current_user.id, current_user.company_id, user.id) %></center></strong></td>
+        </tr> 
+      <% end %>
+    <% end %>
+  <% end %>
+
+<!-- ########### -->
+
+</table>
+ <% if current_user.has_role? :admin %>
+   <strong><center><%= link_to "Add New User", new_admin_company_user_path(current_user.id) %></center></strong> 
+ <% end %>   
+</center>
+
+<br><br>
+ <% if current_user.has_role? :superadmin %>
+   <% if request.path == super_admin_users_path %>
+   <strong><center><%= link_to "Add New User", new_super_admin_user_path %></center></strong>
+
+   <% elsif request.path == super_admin_company_users_path(@company) %>
+   <strong><center><%= link_to "Add new Admin", new_super_admin_company_user_path(@company) %></center></strong>
+  <% end %>
+ <% end %>

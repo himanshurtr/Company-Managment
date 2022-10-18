@@ -1,0 +1,94 @@
+<%= form_with model: [@company, @employee] do |form| %>
+
+
+  <center>
+    <div>
+     <strong><%= form.label :companyid %></strong><br>
+      <%= form.collection_select(:company_id, Company.where(id:@company), 'id', 'name')%> 
+      <% @employee.errors.full_messages_for(:company_id).each do |message| %>
+        <div style="color: red;"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :name, style: "display: block" %>
+      <%= form.text_field :name %>
+      <% @employee.errors.full_messages_for(:name).each do |message| %>
+        <div style="color: red;"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :last_name, style: "display: block" %>
+      <%= form.text_field :last_name %>
+      <% @employee.errors.full_messages_for(:last_name).each do |message| %>
+        <div style="color: red;"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :email, style: "display: block" %>
+      <%= form.text_field :email %>
+      <% @employee.errors.full_messages_for(:email).each do |message| %>
+        <div style="color: red;"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :address, style: "display: block" %>
+      <%= form.text_field :address %>
+      <% @employee.errors.full_messages_for(:address).each do |message| %>
+        <div style="color: red;"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :designation, style: "display: block" %>
+      <%= form.text_field :designation %>
+      <% @employee.errors.full_messages_for(:designation).each do |message| %>
+        <div style="color: red;"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :city, style: "display: block" %>
+      <%= form.text_field :city %>
+      <% @employee.errors.full_messages_for(:city).each do |message| %>
+        <div style="color: red;"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :mob_no, style: "display: block" %>
+      <%= form.text_field :mob_no %>
+      <% @employee.errors.full_messages_for(:mob_no).each do |message| %>
+        <div style="color: red;"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :salary, style: "display: block" %>
+      <%= form.number_field :salary %>
+      <% @employee.errors.full_messages_for(:salary).each do |message| %>
+        <div style="color: red;"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :technology, style: "display: block" %>
+      <%= form.text_field :technology %>
+      <% @employee.errors.full_messages_for(:technology).each do |message| %>
+        <div style="color: red;"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :image %><br>
+      <%= form.file_field :image %><br>
+    </div><br>    
+
+    <div>
+      <%= form.submit %>
+    </div>
+  </center>
+<% end %>

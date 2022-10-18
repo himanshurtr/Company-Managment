@@ -1,0 +1,13 @@
+<center><h1>User-Details</h1>
+
+<h1><%= @user.id %></h1>
+
+<p><%= @user.email %></p>
+<p><%= @user.roles.pluck(:name).join(" ") %></p>
+
+
+ <%= link_to "Edit User", edit_super_admin_path(@user) %> <br><br>
+  <%= button_to "Delete User", super_admin_path, method: :delete %><br>
+  <%= link_to "Back", super_admins_path %>
+
+</center>

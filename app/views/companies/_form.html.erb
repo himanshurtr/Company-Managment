@@ -1,0 +1,294 @@
+<center>
+  <% if current_user.has_role? :superadmin %>
+    <%= form_with model: @company, url: super_admin_company_path, local: true do |form| %>
+      <div>
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+        <%# @company.errors.full_messages_for(:name).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :address %><br>
+        <%= form.text_field :address %><br>
+        <%# @company.errors.full_messages_for(:address).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :city %><br>
+        <%= form.text_field :city %><br>
+        <%# @company.errors.full_messages_for(:city).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :state %><br>
+        <%= form.text_field :state %><br>
+        <%# @company.errors.full_messages_for(:state).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :phone_no %><br>
+        <%= form.text_field :phone_no %><br>
+        <%# @company.errors.full_messages_for(:phone_no).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :pin_code %><br>
+        <%= form.text_field :pin_code %><br>
+        <%# @company.errors.full_messages_for(:pin_code).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :technologies %><br>
+        <%= form.text_field :technologies %><br>
+        <%# @company.errors.full_messages_for(:technologies).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :link %><br>
+        <%= form.text_field :link %><br>
+        <%# @company.errors.full_messages_for(:link).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :linkdin %><br>
+        <%= form.text_field :linkdin %><br>
+        <%# @company.errors.full_messages_for(:linkdin).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :instagram %><br>
+        <%= form.text_field :instagram %><br>
+        <%# @company.errors.full_messages_for(:instagram).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :facebook %><br>
+        <%= form.text_field :facebook %><br>
+        <%# @company.errors.full_messages_for(:facebook).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div><br>
+
+      <div>
+        <%= form.label :image %><br>
+        <%= form.file_field :image %><br>
+      </div><br>       
+      
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
+      <hr><strong><%= link_to "Back", super_admin_companies_path %></strong><hr>
+  <% end %>
+
+  <% if current_user.has_role? :company_admin %>
+    <%= form_with model: @company, url: company_admin_company_path, local: true do |form| %>
+      <div>
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+        <%# @company.errors.full_messages_for(:name).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :address %><br>
+        <%= form.text_field :address %><br>
+        <%# @company.errors.full_messages_for(:address).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :city %><br>
+        <%= form.text_field :city %><br>
+        <%# @company.errors.full_messages_for(:city).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :state %><br>
+        <%= form.text_field :state %><br>
+        <%# @company.errors.full_messages_for(:state).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :phone_no %><br>
+        <%= form.text_field :phone_no %><br>
+        <%# @company.errors.full_messages_for(:phone_no).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :pin_code %><br>
+        <%= form.text_field :pin_code %><br>
+        <%# @company.errors.full_messages_for(:pin_code).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :technologies %><br>
+        <%= form.text_field :technologies %><br>
+        <%# @company.errors.full_messages_for(:technologies).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :link %><br>
+        <%= form.text_field :link %><br>
+        <%# @company.errors.full_messages_for(:link).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :linkdin %><br>
+        <%= form.text_field :linkdin %><br>
+        <%# @company.errors.full_messages_for(:linkdin).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :instagram %><br>
+        <%= form.text_field :instagram %><br>
+        <%# @company.errors.full_messages_for(:instagram).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :facebook %><br>
+        <%= form.text_field :facebook %><br>
+        <%# @company.errors.full_messages_for(:facebook).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div><br>
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
+      <hr><strong><%= link_to "Back", company_admin_company_path %></strong><hr>
+  <% end %>
+
+<% if current_user.has_role? :admin %>
+  <%= form_with model: @company, url: admin_company_path, local: true do |form| %>
+      <div>
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+        <%# @company.errors.full_messages_for(:name).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :address %><br>
+        <%= form.text_field :address %><br>
+        <%# @company.errors.full_messages_for(:address).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :city %><br>
+        <%= form.text_field :city %><br>
+        <%# @company.errors.full_messages_for(:city).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :state %><br>
+        <%= form.text_field :state %><br>
+        <%# @company.errors.full_messages_for(:state).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :phone_no %><br>
+        <%= form.text_field :phone_no %><br>
+        <%# @company.errors.full_messages_for(:phone_no).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :pin_code %><br>
+        <%= form.text_field :pin_code %><br>
+        <%# @company.errors.full_messages_for(:pin_code).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :technologies %><br>
+        <%= form.text_field :technologies %><br>
+        <%# @company.errors.full_messages_for(:technologies).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :link %><br>
+        <%= form.text_field :link %><br>
+        <%# @company.errors.full_messages_for(:link).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :linkdin %><br>
+        <%= form.text_field :linkdin %><br>
+        <%# @company.errors.full_messages_for(:linkdin).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :instagram %><br>
+        <%= form.text_field :instagram %><br>
+        <%# @company.errors.full_messages_for(:instagram).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :facebook %><br>
+        <%= form.text_field :facebook %><br>
+        <%# @company.errors.full_messages_for(:facebook).each do |message| %>
+          <div style="color:red"><%#= message %></div>
+        <%# end %>
+      </div><br>
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
+  <% end %>
+</center>

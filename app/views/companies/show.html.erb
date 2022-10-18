@@ -1,0 +1,141 @@
+<% if current_user.has_role? :superadmin %>
+  <center>
+   
+    <h1><u> Company-Details</u></h1>
+    <br>
+
+    <%= image_tag @company.image, style: "width:100px" %><hr>
+      <table style="border: 2px solid black;">
+        <tr>
+          <th style="border:2px solid black;background-color:lightgrey;">ID</th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Name</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Address</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>City</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>State</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Contact</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Pin-Code</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Technology</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Visit</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Linkdin</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Instagram</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Facebook</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Admin</center></th>
+        </tr>
+        
+        <tr>  
+          <%# @company.each do |company| %>
+            <td style="border:2px solid black;"><%= @company.id %></td>
+            <td style="border:2px solid black;"><%= @company.name %></td>
+            <td style="border:2px solid black;"><%= @company.address %></td>
+            <td style="border:2px solid black;"><%= @company.city %></td>
+            <td style="border:2px solid black;"><%= @company.state %></td>
+            <td style="border:2px solid black;"><%= @company.phone_no %></td>
+            <td style="border:2px solid black;"><%= @company.pin_code %></td>
+            <td style="border:2px solid black;"><%= @company.technologies %></td>
+            <td style="border:2px solid black;"><%= @company.link %></td>
+            <td style="border:2px solid black;"><%= @company.linkdin%></td>
+            <td style="border:2px solid black;"><%= @company.instagram %></td>
+            <td style="border:2px solid black;"><%= @company.facebook %></td>
+            <td><strong><%= link_to "Company Admins", super_admin_company_users_path(@company) %></strong></td>
+          <%# end %>
+        </tr>
+      </table> 
+    <br>
+    <strong><%= link_to "Back", super_admin_companies_path %></strong>
+  </center>
+
+<% elsif current_user.has_role? :admin %>
+
+  <center>
+    <strong><%= link_to "Back", admin_companies_path(@company) %></strong><br><hr>
+
+  <h1><u> Company-Details</u></h1>
+  <br>
+      <%= image_tag @company.image, style: "width:100px" %><hr>
+      <table style="border: 2px solid black;">
+        <tr>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>ID</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Name</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Address</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>City</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>State</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Contact</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Pin-Code</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Technology</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Visit</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Linkdin</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Instagram</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Facebook</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Admin</center></th>
+        </tr>
+        
+        <tr> 
+        <%# @company.each do |company| %>
+          <td style="border:2px solid black;"><%= @company.id %></td>
+          <td style="border:2px solid black;"><%= @company.name %></td>
+          <td style="border:2px solid black;"><%= @company.address %></td>
+          <td style="border:2px solid black;"><%= @company.city %></td>
+          <td style="border:2px solid black;"><%= @company.state %></td>
+          <td style="border:2px solid black;"><%= @company.phone_no %></td>
+          <td style="border:2px solid black;"><%= @company.pin_code %></td>
+          <td style="border:2px solid black;"><%= @company.technologies %></td>
+          <td style="border:2px solid black;"><%= @company.link %></td>
+          <td style="border:2px solid black;"><%= @company.linkdin%></td>
+          <td style="border:2px solid black;"><%= @company.instagram %></td>
+          <td style="border:2px solid black;"><%= @company.facebook %></td>
+          <td><strong><%= link_to "Company Admins", admin_company_users_path(current_user, @company) %></strong></td>
+        <%# end %>
+        </tr>
+    </table>      
+  <br>
+  </center>
+<% else %>
+
+  <center>
+    <strong><%#= link_to "Preview", company_admin_company_path(current_user) %></strong><br><hr>
+
+  <h1><u> Company-Details</u></h1>
+  <br>
+      <%= image_tag @company.image, style: "width:100px" %><hr>
+      <table style="border: 2px solid black;">
+        <tr>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>ID</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Name</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Address</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>City</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>State</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Contact</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Pin-Code</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Technology</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Visit</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Linkdin</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Instagram</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Facebook</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Edit</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Admins</center></th>
+          <th style="border:2px solid black;background-color:lightgrey;"><center>Employees</center></th>
+        </tr>
+        
+        <tr>
+          <% @company.each do |company| %>
+            <td style="border:2px solid black;"><%= company.id %></td>
+            <td style="border:2px solid black;"><%= company.name %></td>
+            <td style="border:2px solid black;"><%= company.address %></td>
+            <td style="border:2px solid black;"><%= company.city %></td>
+            <td style="border:2px solid black;"><%= company.state %></td>
+            <td style="border:2px solid black;"><%= company.phone_no %></td>
+            <td style="border:2px solid black;"><%= company.pin_code %></td>
+            <td style="border:2px solid black; text-align: center;"><%= company.technologies %></td>
+            <td style="border:2px solid black;"><%= company.link %></td>
+            <td style="border:2px solid black;"><%= company.linkdin%></td>
+            <td style="border:2px solid black;"><%= company.instagram %></td>
+            <td style="border:2px solid black;"><%= company.facebook %></td>
+            <td style="border:2px solid black;"><strong><%= link_to " Edit ", edit_company_admin_company_path(current_user) %></strong></td>
+            <td style="border:2px solid black; "><strong><%= link_to "Admins",admin_company_users_path(current_user, @company) %></strong></td>
+            <td><strong><%= link_to " Employees ", company_admin_company_employees_path(current_user.id) %></strong></td>
+            <% end %>
+        </tr>
+    </table>      
+  <br>
+  </center>
+<% end %>

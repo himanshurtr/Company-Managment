@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+<center>
+  <h1>Employee Details</h1>
+</center>
+
+<%= render @employee %>
+
+<% if current_user.has_role? :superadmin %>
+  <center><%= link_to "Back to employees", super_admin_company_employees_path %></center>
+<% end %>
+
+<% if current_user.has_role? :company_admin %>
+  <center><%= link_to "Back to employees", company_admin_company_employees_path(current_user) %></center>
+<% end %>

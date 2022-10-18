@@ -1,0 +1,19 @@
+<center><u><h1>Edit employee</h1></u></center>
+
+<%= render "form", employee: @employee %>
+
+<br>
+
+<center>
+<div>
+  <% if current_user.has_role? :superadmin %>
+    <%= link_to "Show this employee", company_employee_path %> |
+    <%= link_to "Back to employees", company_employees_path %>
+  <% end %>
+
+  <% if current_user.has_role? :company_admin %>
+    <%= link_to "Show this employee", company_admin_company_employee_path %> |
+    <%= link_to "Back to employees", company_admin_company_employees_path %>
+  <% end %>
+</div>
+</center>

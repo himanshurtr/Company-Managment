@@ -1,0 +1,27 @@
+
+ <center>
+  <div style="border:2px solid black; width: 700px;height: 550px; padding-top:25px;background-color: lightgrey;">
+<h1> Companies-Details</h1>
+<br>
+ <table style="border:2px solid black">
+      <tr>
+        <th style="border:2px solid black;">Company_ID</th>
+        <th style="border:2px solid black;">Company_Name</th>
+        <th style="border:2px solid black;">City</th>
+        <th style="border:2px solid black;">Display</th>
+      </tr>
+      <% if current_user.has_role? :superadmin %>
+        <% @company.each do |company| %>
+          <tr>
+            <th style="border:2px solid black;"><%= company.id %></th>
+            <th style="border:2px solid black;"><%= company.name %></th>
+            <th style="border:2px solid black;"><%= company.city %></th>
+            <th style="border:2px solid black; text-align: center;"><%= link_to "Show", com_show_super_admins_path %></th>
+          </tr>
+        <% end %>
+      <% end %>
+</table>
+
+<%= link_to "Back",root_path %>
+</div>
+</center>

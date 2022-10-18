@@ -1,0 +1,20 @@
+<% if request.path == super_admin_company_employees_url(@company) %>
+  <% action = super_admin_company_employees_path %>
+
+<% elsif request.path == admin_company_employees_path(current_user.id, @company) %>
+  <% action = admin_company_employees_path %>
+
+<% elsif request.path == company_admin_company_employees_path(current_user.id) %>
+  <% action = company_admin_company_employees_path %>
+
+<%else%>
+  <% action = super_admin_company_employees_path %>
+<% end %>  
+
+  <center style="padding-left: 800px;">
+    <%= search_form_for  @q, url:action do |form| %>
+      <%= form.search_field :name_cont, value:''  %>
+      <%= form.submit "Search" %> 
+    <% end %> 
+  </center>
+

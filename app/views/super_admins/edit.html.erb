@@ -1,0 +1,25 @@
+<center>
+  <h1>Edit User</h1>
+<%= form_with model: @user, url: super_admin_path, local: true do |form| %>
+    <div>
+    <strong><%= form.label :email %></strong><br>
+    <%= form.text_field :email %>
+    <% @user.errors.full_messages_for(:email).each do |message| %>
+      <div style="color:red;"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <strong><%= form.label :password %></strong><br>
+    <%= form.text_field :password %><br>
+    <% @user.errors.full_messages_for(:password).each do |message| %>
+      <div style="color:red;"><%= message %></div>
+    <% end %>
+  </div>
+  <br>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+</center>
+

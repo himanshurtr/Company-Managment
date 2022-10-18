@@ -1,0 +1,79 @@
+
+<%= render 'search' %>
+<center>
+    <h1><u>Companies-Details</u></h1>
+    <br>
+    <table style="border:2px solid black">
+      <tr>
+        <th style="border:2px solid black;background-color: lightgrey;">Company ID</th>
+        <th style="border:2px solid black;background-color: lightgrey; width:90px; text-align:center;">Company</th>
+        <th style="border:2px solid black;background-color: lightgrey; text-align: center;">Company Name</th>
+        <th style="border:2px solid black;background-color: lightgrey; text-align: center;">City</th>
+        <th style="border:2px solid black;background-color: lightgrey;">Display</th>
+        <th style="border:2px solid black;background-color: lightgrey;">Edit Company</th>
+        <th style="border:2px solid black;background-color: lightgrey;">Delete Company</th>
+        <th style="border:2px solid black;background-color: lightgrey;">Company Employees</th>
+
+      </tr>
+      <% if current_user.has_role? :superadmin %>
+        <% @companies.each do |company| %>
+          <tr>
+            <th style="border:2px solid black;"><center><%= company.id %></center></th>
+            <th style="border:2px solid black;"><center><%= image_tag company.image, style:"width:70px" if company.image.attached?%></center></th>
+            <th style="border:2px solid black;"><center><%= company.name %></center></th>
+            <th style="border:2px solid black;"><center><%= company.city %></center></th>
+            <th style="border:2px solid black; text-align: center;"><%= link_to "Show",super_admin_company_path(company) %></th>
+
+            <th style="border:2px solid black;"><center><%= link_to " Edit ", edit_super_admin_company_path(company) %></center></th>
+            <th style="border:2px solid black;"><br><center><%= button_to " Delete ", super_admin_company_path(company), method: :delete %></center><br></th>
+
+            <th style="border:2px solid black;"><center><%= link_to "Employees", super_admin_company_employees_path(company) %></center></th>
+          </tr>
+        <% end %>
+            <strong><%= link_to "Add New Company", new_super_admin_company_path %></strong>
+            <hr><strong><%= link_to "Back", root_path %></strong><hr>
+      <% end %>
+
+      
+      <% if current_user.has_role? :admin %>
+        <% @companies.each do |company| %>
+          <tr>
+            <th style="border:2px solid black;"><center><%= company.id %></center></th>
+            <th style="border:2px solid black;"><center><%= image_tag company.image, style:"width:70px" if company.image.attached?%></center></th>
+            <th style="border:2px solid black;"><center><%= company.name %></center></th>
+            <th style="border:2px solid black;"><center><%= company.city %></center></th>
+            <th style="border:2px solid black; text-align: center;"><%= link_to "Show",admin_company_path(current_user, company) %></th>
+
+            <th style="border:2px solid black;"><center><%= link_to " Edit ", edit_admin_company_path(current_user, company) %></center></th>
+
+            <th style="border:2px solid black;"><br><center><%= button_to " Delete ", admin_company_path(current_user, company), method: :delete %></center><br></th>
+
+            <th style="border:2px solid black;"><center><%= link_to "Employees",admin_company_employees_path(current_user,company) %></center></th>
+          </tr>
+        <% end %>
+           <strong><%= link_to "Add New Company", new_admin_company_path(current_user) %></strong>
+           <hr><strong><%= link_to "Back", admin_companies_path(current_user) %></strong><hr>
+      <% end %>
+
+
+      <% if current_user.has_role? :company_admin %>
+        <% @companies.each do |company| %>
+          <% if current_user.company_id == company.id %>
+            <tr>
+              <th style="border:2px solid black;"><center><%= company.id %></center></th>
+              <th style="border:2px solid black;"><center><%= company.name %></center></th>
+              <th style="border:2px solid black;"><center><%= company.city %></center></th>
+              <th style="border:2px solid black; text-align: center;"><%= link_to "Show",admin_company_path(current_user, company) %></th>
+
+              <th style="border:2px solid black;"><center><%= link_to " Edit ", edit_admin_company_path(current_user, company) %></center></th>
+
+              <th style="border:2px solid black;"><br><center><%= button_to " Delete ", admin_company_path(current_user, company), method: :delete %></center><br></th>
+
+              <th style="border:2px solid black;"><center><%= link_to "Employees",admin_company_employees_path(current_user,company) %></center></th>
+            </tr>
+          <% end %>
+        <% end %>
+      <% end %>      
+    </table>
+
+</center>
