@@ -285,7 +285,13 @@
         <%# @company.errors.full_messages_for(:facebook).each do |message| %>
           <div style="color:red"><%#= message %></div>
         <%# end %>
+      </div>
+
+      <div>
+        <%= form.label :image %><br>
+        <%= form.file_field :image %><br>
       </div><br>
+            
       <div>
         <%= form.submit %>
       </div>

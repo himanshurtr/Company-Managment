@@ -1,77 +1,113 @@
 <center>
   <h1>Edit User</h1>
-<%= form_with model: @user, url: super_admin_user_path, local: true do |form| %>
+ <% if current_user.has_role? :superadmin %>
+   <% if request.path == edit_super_admin_user_path %>
+     <% action = super_admin_user_path %>
+   <% elsif request.path == edit_super_admin_company_user_path %>
+     <% action = super_admin_company_user_path(@company) %>
+   <% end %>
+ <% end %>      
+
+ <%= form_with model: @user, url: action, local: true do |form| %>
+    
+   <% if @user.has_role? :superadmin %>
+     <div>
+       <strong><%= form.label :email %></strong><br>
+       <%= form.text_field :email %>
+       <% @user.errors.full_messages_for(:email).each do |message| %>
+       <div style="color:red;"><%= message %></div>
+       <% end %>
+     </div>
+
+      <div>
+        <strong><%= form.label :password %></strong><br>
+        <%= form.text_field :password %><br>
+        <% @user.errors.full_messages_for(:password).each do |message| %>
+          <div style="color:red;"><%= message %></div>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form.label :image %><br>
+        <%= form.file_field :image %><br>
+      </div>   
+    
+      <br>
+      <div>
+        <%= form.submit %>
+      </div>
+
+   <% else %>
+
+    <% if request.path == edit_super_admin_user_path %>
+
+    <% elsif request.path == edit_super_admin_company_user_path(@company) %>
+      <div>
+        <strong><%= form.label :company %></strong><br>
+          <%= form.collection_select(:company_id, Company.where(id:@company), 'id', 'name')%>        
+          <% @user.errors.full_messages_for(:company_id).each do |message| %>
+          <div style="color:red;"><%= message %></div>
+          <% end %>
+      </div>
+    <% end %> 
+   <!--  <div>
+      <strong><%#= form.label :companyid %></strong><br>
+      <%#= form.text_field :company_id, readonly: true %>    
+      <%# @user.errors.full_messages_for(:company_id).each do |message| %>
+        <div style="color:red;"><%#= message %></div>
+      <%# end %>
+    </div> -->
+   
+
+      <div>
+        <strong><%= form.label :email %></strong><br>
+        <%= form.text_field :email %>
+        <% @user.errors.full_messages_for(:email).each do |message| %>
+        <div style="color:red;"><%= message %></div>
+        <% end %>
+      </div>
+
+      <div>
+        <strong><%= form.label :password %></strong><br>
+        <%= form.text_field :password %><br>
+        <% @user.errors.full_messages_for(:password).each do |message| %>
+          <div style="color:red;"><%= message %></div>
+        <% end %>
+      </div>
+
+      <div><br>
+        <h6><%= form.label :image %></h6>
+        <%= form.file_field :image %><br>
+      </div> 
+
+      <br>
+
+      <% if request.path == edit_super_admin_user_path %>
+        <div>
+          <strong><%= form.label :Role %></strong><br>      
+          <%= form.collection_radio_buttons :role_ids, Role.where(id:1), :id, :name %>
+          <%#= form.collection_radio_buttons :role_ids, Role.where(id:4), :id, :name %>
+          <br><strong style="color:red"><%= @user.errors[:roles].join(" ") %></strong>
+        </div>
+     
+      <% elsif request.path == edit_super_admin_company_user_path(@company) %>
+        <div>
+          <strong><%= form.label :Role %></strong><br>      
+          <%= form.collection_radio_buttons :role_ids, Role.where(id:5), :id, :name %>
+          <br><strong style="color:red"><%= @user.errors[:roles].join(" ") %></strong>
+        </div>
+      <% end %>
+    <!-- <div>
+        <h6><%#= form.label :Roles %></h6>
+        <%#= form.collection_radio_buttons :role_ids, Role.all, :id, :name %>
+        <%#= @user.errors[:roles].join(" ") %>
+    </div>
+   -->
+      <div>
+        <%= form.submit %>
+      </div>
+  <% end %>
   
- <% if @user.has_role? :superadmin %>
- <div>
-    <strong><%= form.label :email %></strong><br>
-    <%= form.text_field :email %>
-    <% @user.errors.full_messages_for(:email).each do |message| %>
-      <div style="color:red;"><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <strong><%= form.label :password %></strong><br>
-    <%= form.text_field :password %><br>
-    <% @user.errors.full_messages_for(:password).each do |message| %>
-      <div style="color:red;"><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.label :image %><br>
-    <%= form.file_field :image %><br>
-  </div>   
-  
-  <br>
-  <div>
-    <%= form.submit %>
-  </div>
-
- <% else %>
-  <div>
-    <strong><%= form.label :companyid %></strong><br>
-    <%= form.text_field :company_id, readonly: true %>    
-    <% @user.errors.full_messages_for(:company_id).each do |message| %>
-      <div style="color:red;"><%= message %></div>
-    <% end %>
-  </div>
- 
-
-  <div>
-    <strong><%= form.label :email %></strong><br>
-    <%= form.text_field :email %>
-    <% @user.errors.full_messages_for(:email).each do |message| %>
-      <div style="color:red;"><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <strong><%= form.label :password %></strong><br>
-    <%= form.text_field :password %><br>
-    <% @user.errors.full_messages_for(:password).each do |message| %>
-      <div style="color:red;"><%= message %></div>
-    <% end %>
-  </div>
-
-  <div><br>
-    <h6><%= form.label :image %></h6>
-    <%= form.file_field :image %><br>
-  </div> 
-
-<br>
-
-  <div>
-      <h6><%= form.label :Roles %></h6>
-      <%= form.collection_radio_buttons :role_ids, Role.all, :id, :name %>
-      <%= @user.errors[:roles].join(" ") %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
   <% if request.path == super_admin_users_path %>
     <hr><strong><%= link_to "Back", super_admin_users_path %></strong><hr>
   <%# elsif request.path == edit_admin_company_user_path %>

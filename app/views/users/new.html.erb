@@ -7,19 +7,20 @@
       <hr><strong><%= link_to "Back", super_admin_users_path %></strong><hr> 
 
     <% elsif request.path == new_super_admin_company_user_path %>
-      <% action = super_admin_company_users_path %>
+      <% action = super_admin_company_users_path(@company) %>
       <hr><strong><%= link_to "Back", super_admin_company_users_path %></strong><hr> 
     <% end %>  
   <% end %>
     
   <% if current_user.has_role? :admin  %>
-    <% action = admin_company_users_path(1,1) %>
+    <% action = admin_company_users_path(current_user.id, @company) %>
     <hr><strong><%= link_to "Back", admin_company_users_path %></strong><hr>
   <% end %> 
 
-
   <%= form_with model: @user, url: action, local: true do |form| %>
-    <%# if request.path == new_super_admin_company_user_path(@company) %>
+    <% if request.path == new_super_admin_user_path %>
+
+    <% elsif request.path == new_super_admin_company_user_path(@company) || request.path == new_admin_company_user_path %>
       <div>
         <strong><%= form.label :companyid %></strong><br>
           <%= form.collection_select(:company_id, Company.where(id:@company), 'id', 'name')%>        
@@ -27,7 +28,7 @@
           <div style="color:red;"><%= message %></div>
           <% end %>
       </div>
-    <%# end %>  
+    <% end %>  
 
 
     <div>
@@ -52,16 +53,16 @@
     </div>    
 
     <br>
-    <% if request.path == super_admin_users_path %>
+    <% if request.path == new_super_admin_user_path %>
 
       <div>
         <strong><%= form.label :Role %></strong><br>      
         <%= form.collection_radio_buttons :role_ids, Role.where(id:1), :id, :name %>
+        <%#= form.collection_radio_buttons :role_ids, Role.where(id:4), :id, :name %>
         <br><strong style="color:red"><%= @user.errors[:roles].join(" ") %></strong>
       </div>
    
-   <%# debugger %>
-    <% elsif request.path == new_super_admin_company_user_path(@company) %>
+    <% elsif request.path == new_super_admin_company_user_path(@company) || request.path == new_admin_company_user_path(@company) %>
       <div>
         <strong><%= form.label :Role %></strong><br>      
         <%= form.collection_radio_buttons :role_ids, Role.where(id:5), :id, :name %>

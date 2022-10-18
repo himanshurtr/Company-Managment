@@ -21,14 +21,19 @@ class UsersController < ApplicationController
   end
 
   def create
-    # debugger
     @user = User.new(user_params)
 
     if @user.save
 
       if current_user.has_role? :superadmin
-        redirect_to super_admin_users_path(@company, @user), notice: "user is successfully created."
-      else
+        if request.path == super_admin_users_path
+          redirect_to super_admin_users_path(@company, @user), notice: "user is successfully created."
+        elsif request.path == super_admin_company_users_path
+          redirect_to super_admin_company_users_path(@company), notice: "Company admin is successfully created by superadmin "
+        end 
+      end 
+
+      if current_user.has_role? :admin
         redirect_to admin_company_users_path(@company, @user), notice: "User Whoes Roll Is Admin Created Successfully."
       end
     else
@@ -39,7 +44,14 @@ class UsersController < ApplicationController
   def update
 
     if @user.update(user_params)
-      redirect_to super_admin_users_path(@company, @user), notice: "user was successfully updated."
+
+      if current_user.has_role? :superadmin
+        if request.path == super_admin_user_path
+          redirect_to super_admin_users_path(@company, @user), notice: "user was successfully updated."
+        elsif request.path == super_admin_company_user_path
+          redirect_to super_admin_company_users_path(@company), notice:"Company admin is successfully updated by superadmin "
+        end
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -48,7 +60,11 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
       if current_user.has_role? :superadmin
-        redirect_to super_admin_users_path, status: :see_other, notice:"User is successfully deleted."
+        if request.path == super_admin_user_path
+          redirect_to super_admin_users_path, status: :see_other, notice:"User is successfully deleted."
+        elsif request.path == super_admin_company_user_path(@company)
+          redirect_to super_admin_company_users_path(@company), notice:"Company admin is successfully deleted by superadmin "
+        end
       else
         redirect_to admin_company_users_path(current_user.id, @company), status: :see_other, notice:"Admin User is successfully deleted." 
       end

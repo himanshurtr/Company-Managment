@@ -50,8 +50,8 @@
           <td style="border: 2px solid black"><center><%= user.roles.pluck(:name).join(" ") %></center></td>
           <td style="border: 2px solid black"><center><%= user.company_id %></center></td>
           <td style="border: 2px solid black"><strong><%= link_to "Show", super_admin_user_path(user) %></strong></td>
-          <td style="border: 2px solid black"><strong><%= link_to "Edit", edit_super_admin_user_path(user) %></strong> </td>
-          <td style="border: 2px solid black"><br><strong><center><%= button_to "Delete",  super_admin_user_path(user), method: :delete %></center></strong><br></td>
+          <td style="border: 2px solid black"><strong><%= link_to "Edit", edit_super_admin_company_user_path(@company, user) %></strong> </td>
+          <td style="border: 2px solid black"><br><strong><center><%= button_to "Delete", super_admin_company_user_path(@company, user), method: :delete %></center></strong><br></td>
         </tr>
       <% end %>
     <% end %>
